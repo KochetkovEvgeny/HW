@@ -67,59 +67,30 @@ class Classroom(base):
 dviz = create_engine(URL)
 session = sessionmaker(bind=dviz)
 db = session()
-base.metadata.drop_all(bind=dviz)
-base.metadata.create_all(bind=dviz) 
 
 
-child = Child(numberofclass = 10, letterclass = "B", age = 16, name = "Egor")
-db.add(child)
-db.commit()
-children = db.query(Child).all()
-print(children)
+if __name__ == "__main__":
+    base.metadata.drop_all(bind=dviz)
+    base.metadata.create_all(bind=dviz) 
 
-for i in children:
-    print(i.id)
-    print(i.name)
-    print(i.age)
-    print(i.numberofclass)
-    print(i.letterclass)
 
-print("\n")
+    child = Child(numberofclass=10, letterclass="B", age=16, name="Egor")
+    db.add(child)
+    db.commit()
 
-teacher = Teacher(skils = "Math", contract = "sber", name = "victor", age = "33")
-db.add(teacher)
-db.commit()
-teacher = db.query(Teacher).all()
-print(teacher)
+    teacher = Teacher(skils="Math", contract="sber", name="victor", age=33)
+    db.add(teacher)
+    db.commit()
 
-for i in teacher:
-    print(i.name)
-    print(i.age)
-    print(i.contract)
-    print(i.skils)
+    lesson = Lesson(subject="PE", time=datetime.time(10, 35, 0))
+    db.add(lesson)
+    db.commit()
 
-print("\n")
+    classroom = Classroom(number=123)
+    db.add(classroom)
+    db.commit()
 
-lesson = Lesson(subject = "PE", time = datetime.time(10,35,0))
-db.add(lesson)
-db.commit()
-lesson = db.query(Lesson).all()
-print(lesson)
-
-for i in lesson:
-    print(i.subject)
-    print(i.time)
-
-print('\n')
-
-classroom = Classroom(number = "123")
-db.add(classroom)
-db.commit()
-classroom = db.query(Classroom).all()
-print(classroom)
-
-for i in classroom:
-    print(i.number)
+    print("Данные добавлены.")
 
 
 
