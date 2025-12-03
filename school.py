@@ -1,4 +1,4 @@
-URL = "postgresql://postgres:my_password@127.0.0.1:5432/db"
+URL = "postgresql://postgres:my_password@db:5432/db"
 
 from sqlalchemy import create_engine, Column, Integer, String, Time, ForeignKey, Table
 from sqlalchemy.orm import DeclarativeBase, sessionmaker, relationship

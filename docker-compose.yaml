@@ -13,6 +13,31 @@ services:
       - "5432:5432"  # Проброс портов (внешний:внутренний)
     networks:
       - net
+  app:  
+    image: bdbd
+    build: .
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/app
+
+    networks:
+      - net
+
+    
+  
+
+  test_app:  
+    image: bdbd
+    build: .
+    volumes:
+      - ./:/app
+    entrypoint: "python3 -m pytest"
+    networks:
+      - net
+
+    
+
 
 volumes:
   postgres_data1:
@@ -20,4 +45,6 @@ volumes:
 networks:
   net:
     driver: bridge
+
+  
 
