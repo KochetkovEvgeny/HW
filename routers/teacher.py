@@ -1,8 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from school import db, Teacher 
 from pydantic import BaseModel 
+from fastapi.templating import Jinja2Templates
 
 router_teacher = APIRouter(prefix="/teacher", tags=["teacher"])
+templates = Jinja2Templates(directory="htmll")
 
 class Requests_body_teacher(BaseModel):
     id : int
@@ -26,9 +28,8 @@ def edit_teacher(edit_teacher_filld : Requests_body_teacher):
     return "ok"
 
 @router_teacher.get("/{id}")
-def get_teacher(id : int):
+def get_teacher(id : int, request : Request):
     teacher = db.query(Teacher).filter(Teacher.id == id).first()
-    print(teacher)
-    return teacher 
+    return templates.TemplateResponse("html.html", {"request" : request, "teacherr" : teacher})
 
 

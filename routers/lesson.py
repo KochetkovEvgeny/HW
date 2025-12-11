@@ -1,10 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from school import db, Lesson
 from pydantic import BaseModel
 import datetime
+from fastapi.templating import Jinja2Templates
 
 router_lesson = APIRouter(prefix="/lesson", tags =["lesson"])
-
+templates = Jinja2Templates(directory="htmll")
 class Requests_body_lesson(BaseModel):
     id : int
     subject : str
@@ -31,7 +32,6 @@ def edit_lesson(edit_lesson_filld : Requests_body_lesson):
     return "ok"
 
 @router_lesson.get("/{id}")
-def get_lesson(id : int):
+def get_lesson(id : int, request : Request):
     lesson = db.query(Lesson).filter(Lesson.id == id).first()
-    print(lesson)
-    return lesson 
+    return templates.TemplateResponse("html.html", {"request" : request, "lessson" : lesson})

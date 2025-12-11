@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Школа — данные</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Данные школьной системы</h1>
+
+
+<section class="block">
+    <h2>Ученики</h2>
+
+    <div class="card">
+        <p><strong>ID:</strong> {{chid.id}}</p>
+        <p><strong>Имя:</strong> {{chid.name}}</p>
+        <p><strong>Возраст:</strong> {{chid.age}}</p>
+        <p><strong>Класс:</strong> {{chid.numberofclass}}{{chid.letterclass}}</p>
+        <p><strong>Скиллы:</strong> {{chid.skils}}</p>
+    </div>
+
+</section>
+
+
+<section class="block">
+    <h2>Учителя</h2>
+
+    <div class="card">
+        <p><strong>ID:</strong> {{teacherr.id}}</p>
+        <p><strong>Контракт:</strong> {{teacherr.contract}}</p>
+    </div>
+
+</section>
+
+
+<section class="block">
+    <h2>Уроки</h2>
+
+    <div class="card">
+        <p><strong>ID:</strong> {{lessson.id}}</p>
+        <p><strong>Предмет:</strong> {{lessson.subject}}</p>
+        <p><strong>Время:</strong> {{lessson.time}}</p>
+    </div>
+
+</section>
+
+
+
+<section class="block">
+    <h2>Кабинеты</h2>
+
+    <div class="card">
+        <p><strong>ID:</strong> {{room.id}}</p>
+        <p><strong>Номер кабинета:</strong> {{room.number}}</p>
+    </div>
+
+</section>
+
+
+</body>
+</html>

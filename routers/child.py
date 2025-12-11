@@ -1,9 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from school import db, Child
 from pydantic import BaseModel
+from fastapi.templating import Jinja2Templates
 
 router_child = APIRouter(prefix="/child", tags=["child"])
-
+templates = Jinja2Templates(directory="htmll")
 class Requests_body_child(BaseModel):
     id : int
     clas : int
@@ -34,8 +35,6 @@ def edit_child(edit_child_filld : Requests_body_child):
     return "ok"
 
 @router_child.get("/{id}")
-def get_child(id : int):
+def get_child(id : int, request : Request):
     child = db.query(Child).filter(Child.id == id).first()
-    print(child)
-#   return {"name" : child.name, "id" : child.id, "age" : child.age}
-    return child
+    return templates.TemplateResponse("html.html", {"request" : request, "chid" : child})

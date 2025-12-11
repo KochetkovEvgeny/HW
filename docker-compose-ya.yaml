@@ -13,23 +13,19 @@ services:
       - "5432:5432"  # Проброс портов (внешний:внутренний)
     networks:
       - net
-  app:  
-    image: bdbd
-    build: .
-    ports:
-      - 8080:8080
-    volumes:
-      - ./:/app
 
-    networks:
-      - net
 
     
   
 
-
-
-    
+  test_app:  
+    image: bdbd
+    build: .
+    volumes:
+      - ./:/app
+    entrypoint: "poetry run python3 -m pytest"
+    networks:
+      - net
 
 
 volumes:
@@ -38,6 +34,3 @@ volumes:
 networks:
   net:
     driver: bridge
-
-  
-
